@@ -65,14 +65,11 @@ module.exports = server => {
     //delete customer
     server.del('/customers/:id', async (req,res,next) => {
         try {
-            const customer = await Customer.findOneAndRemove({ _id: req.params.id });
+            const customer = await Customer.findOneAndDelete({ _id: req.params.id });
             res.send(204);
             next();
         }catch(error) {
             return next(new errors.ResourceNotFoundError(`There is no customer with the id of ${req.params.id}`));
         }
-    });
-
-
-    
+    });    
 };
